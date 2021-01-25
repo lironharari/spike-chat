@@ -5,8 +5,8 @@
 
 const express = require("express");
 const { Server } = require("ws");
-const ActiveUsers = require("./controllers/ActiveUsers.js"); // active users module
-const messageType = require("./models/messageType.js"); // message types
+const ActiveUsers = require("./controllers/user.js"); // active users module
+const messageType = require("./models/type.js"); // message types
 const messageTypeError = "Unknown Message Type";
 
 const app = express();

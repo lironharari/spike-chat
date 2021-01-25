@@ -4,8 +4,8 @@
  *  activeUser - A users that is in the chat
  *  userEntry - a message for client upon client entry (entry or exit)
  */
-const activeUser = require("../models/activeUser.js");
-const userEntry = require("../models/userEntry.js");
+const activeUser = require("../models/user.js");
+const userEntry = require("../models/entry.js");
 
 module.exports = function () {
     this.users = []; // array of active users
