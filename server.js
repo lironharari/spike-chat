@@ -2,6 +2,7 @@
 const express = require("express");
 const { Server } = require("ws");
 const ActiveUsers = require("./controllers/ActiveUsers.js");
+const MessageType = require("./models/messageType.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,21 +22,21 @@ wss.on("connection", (ws) => {
     let data = JSON.parse(message);    
 
     switch (data.type) {
-      case "onopen":
+      case MessageType.OPEN:
         activeUsers.pushNewUser(data);        
         wss.clients.forEach((client) => {
-          client.send(JSON.stringify(activeUsers.createUserEntry("onopen", data)));
+          client.send(JSON.stringify(activeUsers.createUserEntry(MessageType.OPEN, data)));
         });        
         break;
-      case "chat-message":        
+      case MessageType.MESSAGE:        
         wss.clients.forEach((client) => {
           client.send(message);
         });
         break;
-      case "onclose":        
+      case MessageType.CLOSE:        
         activeUsers.removeUser(data.id);        
         wss.clients.forEach((client) => {
-          client.send(JSON.stringify(activeUsers.createUserEntry("onclose", data)));
+          client.send(JSON.stringify(activeUsers.createUserEntry(MessageType.CLOSE, data)));
         });         
         break;        
       default:
