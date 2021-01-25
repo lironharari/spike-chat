@@ -1,11 +1,11 @@
 
 /**
  * Import Models
- *  activeUser - A users that is in the chat
- *  userEntry - a message for client upon client entry (entry or exit)
+ *  user - An active user
+ *  entry - a message for a client upon client entry (entry or exit)
  */
-const activeUser = require("../models/user.js");
-const userEntry = require("../models/entry.js");
+const user = require("../models/user.js");
+const entry = require("../models/entry.js");
 
 module.exports = function () {
     this.users = []; // array of active users
@@ -15,7 +15,7 @@ module.exports = function () {
      * @param {object} data - an object containing client message
      */    
     this.addUser = (data) => {
-        this.users.push(activeUser(data)); // push a new user into list
+        this.users.push(user.create(data)); // push a new user into list
     };
 
     /**
@@ -26,7 +26,7 @@ module.exports = function () {
      * user name, user id, and date of creation.
      */
     this.getUserEntry = (type, data) => (
-        userEntry(type, data, this.users)
+        entry.create(type, data, this.users)
     )
 
     /**
@@ -34,6 +34,6 @@ module.exports = function () {
      * @param {number} id - user id
      */    
     this.removeUser = (id) => {
-        this.users = this.users.filter(user => user.id !== id); // filter a user and update list
+        this.users = this.users.filter(user => user.id !== id); // filter out a user and update list
     };    
 }

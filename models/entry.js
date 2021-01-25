@@ -6,7 +6,7 @@
  * @returns {object} - a message for the client containing entry type (enter or exit)
  * a list of active users, client name, client id, and date of entry
  */
-module.exports = (type, data, users) => (
+module.exports.create = (type, data, users) => (
     {
         type: type,
         users: users,
