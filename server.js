@@ -6,7 +6,7 @@
 const express = require("express");
 const { Server } = require("ws");
 const User = require("./controllers/userController.js"); // active users module
-const Type = require("./models/messageType.js"); // message types
+const type = require("./models/messageType.js"); // message types
 const INDEX = "/index.html"; // initial websocket client
 const messageTypeError = "Unknown Message Type";
 
@@ -27,21 +27,21 @@ wss.on("connection", (ws) => {
     let data = JSON.parse(message); // parse message data to object
 
     switch (data.type) {
-      case Type.OPEN:
+      case type.OPEN:
         user.addUser(data); // add active user to list
         wss.clients.forEach((client) => { // send user entry message (new client) to all clients
-          client.send(JSON.stringify(user.getUserEntry(Type.OPEN, data)));
+          client.send(JSON.stringify(user.getUserEntry(type.OPEN, data)));
         });        
         break;
-      case Type.MESSAGE:        
+      case type.MESSAGE:        
         wss.clients.forEach((client) => {
           client.send(message); // send chat message to all clients
         });
         break;
-      case Type.CLOSE:        
+      case type.CLOSE:        
         user.removeUser(data.id); // remove user from list
         wss.clients.forEach((client) => { // send user entry message (exit) to all clients
-          client.send(JSON.stringify(user.getUserEntry(Type.CLOSE, data)));
+          client.send(JSON.stringify(user.getUserEntry(type.CLOSE, data)));
         });         
         break;        
       default:
