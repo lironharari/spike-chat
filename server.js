@@ -5,14 +5,14 @@
 
 const express = require("express");
 const { Server } = require("ws");
-const ActiveUsers = require("./controllers/user.js"); // active users module
-const messageType = require("./models/type.js"); // message types
+const User = require("./controllers/userController.js"); // active users module
+const Type = require("./models/messageType.js"); // message types
 const messageTypeError = "Unknown Message Type";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const INDEX = "/index.html"; // initial websocket client
-const activeUsers = new ActiveUsers(); // active users moduless
+const user = new User(); // active users moduless
 
 app.use(express.static(__dirname + "/public")); // expose public folder
 
@@ -27,21 +27,21 @@ wss.on("connection", (ws) => {
     let data = JSON.parse(message); // parse message data to object
 
     switch (data.type) {
-      case messageType.OPEN:
-        activeUsers.pushNewUser(data); // add active user to list
+      case Type.OPEN:
+        user.pushNewUser(data); // add active user to list
         wss.clients.forEach((client) => { // send user entry message (new client) to all clients
-          client.send(JSON.stringify(activeUsers.createUserEntry(messageType.OPEN, data)));
+          client.send(JSON.stringify(user.createUserEntry(Type.OPEN, data)));
         });        
         break;
-      case messageType.MESSAGE:        
+      case Type.MESSAGE:        
         wss.clients.forEach((client) => {
           client.send(message); // send chat message to all clients
         });
         break;
-      case messageType.CLOSE:        
-        activeUsers.removeUser(data.id); // remove user from list
+      case Type.CLOSE:        
+        user.removeUser(data.id); // remove user from list
         wss.clients.forEach((client) => { // send user entry message (exit) to all clients
-          client.send(JSON.stringify(activeUsers.createUserEntry(messageType.CLOSE, data)));
+          client.send(JSON.stringify(user.createUserEntry(Type.CLOSE, data)));
         });         
         break;        
       default:
