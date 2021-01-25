@@ -1,11 +1,11 @@
 
 /**
  * Import Models
- *  user - An active user
- *  entry - a message for a client upon client entry (entry or exit)
+ *  User - An active user
+ *  Entry - a message for a client upon client entry (entry or exit)
  */
-const user = require("../models/user.js");
-const entry = require("../models/entry.js");
+const User = require("../models/user.js");
+const Entry = require("../models/entry.js");
 
 module.exports = function () {
     this.users = []; // array of active users
@@ -15,7 +15,7 @@ module.exports = function () {
      * @param {object} data - an object containing client message
      */    
     this.addUser = (data) => {
-        this.users.push(user.create(data)); // push a new user into list
+        this.users.push(User.create(data)); // push a new user into list
     };
 
     /**
@@ -26,7 +26,7 @@ module.exports = function () {
      * user name, user id, and date of creation.
      */
     this.getUserEntry = (type, data) => (
-        entry.create(type, data, this.users)
+        Entry.create(type, data, this.users) // create entry message
     )
 
     /**
