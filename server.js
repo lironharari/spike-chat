@@ -28,9 +28,9 @@ wss.on("connection", (ws) => {
 
     switch (data.type) {
       case Type.OPEN:
-        user.pushNewUser(data); // add active user to list
+        user.addUser(data); // add active user to list
         wss.clients.forEach((client) => { // send user entry message (new client) to all clients
-          client.send(JSON.stringify(user.createUserEntry(Type.OPEN, data)));
+          client.send(JSON.stringify(user.getUserEntry(Type.OPEN, data)));
         });        
         break;
       case Type.MESSAGE:        
@@ -41,7 +41,7 @@ wss.on("connection", (ws) => {
       case Type.CLOSE:        
         user.removeUser(data.id); // remove user from list
         wss.clients.forEach((client) => { // send user entry message (exit) to all clients
-          client.send(JSON.stringify(user.createUserEntry(Type.CLOSE, data)));
+          client.send(JSON.stringify(user.getUserEntry(Type.CLOSE, data)));
         });         
         break;        
       default:

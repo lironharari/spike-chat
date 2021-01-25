@@ -14,7 +14,7 @@ module.exports = function () {
      * Add a new user to the active users list.
      * @param {object} data - an object containing client message
      */    
-    this.pushNewUser = (data) => {
+    this.addUser = (data) => {
         this.users.push(activeUser(data)); // push a new user into list
     };
 
@@ -25,7 +25,7 @@ module.exports = function () {
      * @returns {object} - an object containing message type, a list of active users, 
      * user name, user id, and date of creation.
      */
-    this.createUserEntry = (type, data) => (
+    this.getUserEntry = (type, data) => (
         userEntry(type, data, this.users)
     )
 
@@ -35,13 +35,5 @@ module.exports = function () {
      */    
     this.removeUser = (id) => {
         this.users = this.users.filter(user => user.id !== id); // filter a user and update list
-    };
-
-    /**
-     * Get list of active users
-     * @returns {object} - list of active users as array
-     */     
-    this.getActiveUsers = () => (
-        this.users
-    )
+    };    
 }
