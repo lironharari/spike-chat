@@ -1,0 +1,139 @@
+/****** Responsive Styles *********/
+
+/* Mobile Styles */
+@media only screen and (max-width: 415px) {
+    .users-list{
+        display: none;
+    }
+    .col-25, .col-75, .chat-input input[type=text] {
+        width: 100%;
+        margin-top: 0;
+    }  
+
+    .chat-input input[type=submit],
+    .chat-input input[type=button]{
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    
+    main{          
+        margin: 0 5%;
+        width: 90%;            
+    } 
+
+    .chat {
+        width: 100%;
+    }
+    
+    .avatar-container{
+        width: 20%;          
+    }    
+
+    .message-container{
+        width: 80%; 
+    }  
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 415px) and (max-width: 1024px) {
+    .col-25, .col-75, .chat-input input[type=text] {
+        width: 100%;
+        margin-top: 0;
+    }  
+    
+    .chat-input input[type=submit],
+    .chat-input input[type=button] {
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0;
+    } 
+
+    .users-list-avatar {
+        width: 30px;
+        height: 30px;
+        margin-top: 12px;
+    }
+
+    .users-list-info span {
+        font-size: 0.9em; 
+    }
+    
+    .users-list-info p {        
+        font-size: 0.6em;          
+    }
+
+    .users-list li {
+        padding: 10px;
+        height: 75px;                      
+    }   
+
+    main {          
+        margin: 0 5%;
+        width: 90%;            
+    }    
+
+    .avatar-container{
+        width: 15%;          
+    }    
+
+    .message-container{
+        width: 85%; 
+    }        
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 1024px) {  
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }   
+
+    .chat-input input[type=text] {
+        width: 80%;                       
+    } 
+
+    .chat-input input[type=submit],
+    .chat-input input[type=button] {
+        margin-left: 14px;          
+        width: 15%;                                   
+    }  
+
+    .users-list-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .users-list-info span {
+        font-size: 1.1em; 
+    }
+    
+        .users-list-info p {        
+        font-size: 0.7em;          
+    }
+
+    .users-list li {
+        padding: 20px;
+        height: 100px;                      
+    }  
+
+    main {          
+        margin: 0 10%;
+        width: 80%;            
+    }  
+
+    .avatar-container{
+        width: 10%;          
+    }    
+
+    .message-container{
+        width: 90%; 
+    }   
+}        

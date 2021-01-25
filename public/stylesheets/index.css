@@ -1,0 +1,11 @@
+/*
+    Theme Name: Spike Chat
+    Description: Spike Chat Interview Exercise
+    Author: Liron Harari
+    Author URI: https://spike-chat.herokuapp.com/
+*/
+
+@import "chat.css";
+@import "modal.css";
+@import "reset.css";
+@import "responsive.css";

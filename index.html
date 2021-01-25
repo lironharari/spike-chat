@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>     
+    <link rel="shortcut icon" href="images/favicon.ico" />    
+    <title>Spike Chat</title>     
+    <meta name="title" content="Liron Harari - Spike Chat"/>
+    <meta name="description" content="Public chat exercise"/>    
+    <script src="javascripts/helper.js"></script> 
+    <script src="javascripts/global.js"></script> 
+    <script src="javascripts/avatar.js"></script> 
+    <link rel="stylesheet" href="stylesheets/index.css">      
+  </head>
+  <body>  
+    <!-- No Script -->
+    <noscript><h3>You need to enable JavaScript to run this app.</h3></noscript>
+    <!-- Chat -->
+    <main>    
+        <div class="chat">
+            <header></header>
+            <div class="chat-container"></div>
+            <div class="chat-input">
+              <form id="chat-form">
+                <input type="text" id="message" name="message" placeholder="Type...">
+                <input type="submit" value="Send">                  
+              </form>
+            </div>
+        </div> 
+        <aside class="users-list"><ul></ul></aside>             
+    </main>  
+    <!-- Login -->  
+      <div id="welcomeScreen" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">            
+            <h2>Chat Login</h2>
+          </div>
+          <div class="modal-body">
+            <form id="modal-form">
+              <div class="modal-container">
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="userName">Name<span class="red">*</span></label>
+                    </div>
+                    <div class="col-75">
+                      <input type="text" id="userName" name="userName" placeholder="Your name..">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="userAvatar">Avatar<span class="red">*</span></label>
+                    </div>
+                    <div class="col-75">
+                      <input type="file" accept="image/*" name="userAvatar" id="userAvatar" onchange="loadFile(event)">                    
+                    </div>
+                  </div>                                
+                  <div class="row">
+                    <span class="error"></span>
+                    <input type="submit" value="Enter Chat">                  
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>  
+    <script src="javascripts/modal.js"></script> 
+    <script src="javascripts/chat.js"></script> 
+  </body>
+</html>

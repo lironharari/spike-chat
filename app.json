@@ -1,0 +1,6 @@
+{
+  "name": "Liron Harari Spike Chat",
+  "description": "Chat on Heroku",
+  "repository": "https://github.com/lironharari/spike-chat.git",
+  "keywords": ["node", "websocket"]
+}
