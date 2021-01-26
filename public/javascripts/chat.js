@@ -3,15 +3,6 @@
  */
 
 /**
- * Handle chat form onsubmit event
- * @param {DOM Event} e - input event of form submit
- */ 
-document.querySelector("#chat-form").onsubmit = (e) => {
-  e.preventDefault(); //prevent default submit event handling
-  sendMessage(); // send chat message
-};
-
-/**
  * Display chat
  */ 
 const showChat = () => {
@@ -209,7 +200,17 @@ const appendEntryMessage = (isEntry, data) => {
  */ 
 const initChat = () => {
     userID = generateID(); // generate unique client id
-    ws = new WebSocket(getHost()); // create WebSocket element
+    let messageType = { // various web socket message types
+      OPEN: 'onopen', // new client
+      MESSAGE: 'chat-message', // client message
+      CLOSE: 'onclose' // client exit
+    };
+    let ws = new WebSocket(getHost()); // create WebSocket element
+
+    document.querySelector("#chat-form").onsubmit = (e) => {
+      e.preventDefault(); //prevent default submit event handling
+      sendMessage(ws, messageType); // send chat message
+    };
 
     window.addEventListener("beforeunload", () => { // add listener to user exit
           ws.send(JSON.stringify(generateMessage(messageType.CLOSE,""))); // upon exit notify the server
@@ -249,10 +250,10 @@ const initChat = () => {
 /**
  * Send chat message
  */ 
-const sendMessage = () => {
+const sendMessage = (ws, type) => {
     let messageInput = document.querySelector("#message"); // get input text element
     if(messageInput.value.trim().length) { // check if message is valid
-      ws.send(JSON.stringify(generateMessage(messageType.MESSAGE,messageInput.value))); // send message to web server
+      ws.send(JSON.stringify(generateMessage(type.MESSAGE,messageInput.value))); // send message to web server
       messageInput.value = ""; // empty the input element
     }
 };
